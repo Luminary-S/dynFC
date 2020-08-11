@@ -1,0 +1,6 @@
+reference/
+others/
+writing/
+sheet/
+rosbag/
+*.pyc
