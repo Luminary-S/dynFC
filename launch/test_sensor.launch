@@ -1,0 +1,47 @@
+<launch>
+    <arg name="pkg_name"  default="dynforcecontrol" />
+        
+    <!-- ur3_bringup 0000-->
+    <!-- <include file="$(find ur_modern_driver)/launch/ur3_bringup.launch">
+        <arg name="limited" value="true" />
+        <arg name="robot_ip" value="192.168.1.103" />
+    </include> -->
+
+    <!-- robotiq FT300  0000-->
+    <include file="$(find robotiq_ft_sensor)/launch/ft_sensor.launch" >
+      <arg name="serial_id" value="ttyUSB1" />
+    </include>
+
+    <!-- cam launch -->
+      <!-- usb cam node 22222-->
+    <!-- <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
+    <param name="video_device" value="/dev/video1" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="yuyv" />
+    <param name="camera_frame_id" value="usb_cam" />
+    <param name="io_method" value="mmap"/>
+    </node> -->
+
+    <!-- rqt view window 33333-->
+    <!-- <node name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/usb_cam/image_raw"/>
+    <param name="autosize" value="true" />
+    </node> -->
+
+    <!-- cam processing node 44444-->
+    <!-- <node name="cam_stain_extractor" pkg="$(arg pkg_name)" type="cam_node_19robio.py"   >
+    </node> -->
+    <!-- <include file="$(find demo_singlercr/launch/demo_19robio.launch">
+
+    </include> -->
+
+    <!-- robotiq FT300  0000-->
+    <!-- <include file="$(find robotiq_ft_sensor)/launch/ft_sensor.launch" /> -->
+
+
+    <!-- IMU startup-->
+    <!-- <include file="$(find sensor_startup)/launch/imu_bringup.launch" /> -->
+
+
+</launch>

@@ -1,0 +1,17 @@
+# force trajectory
+forceGenerator:
+  frequency: 2
+  max: 40
+  min: 0
+  shift: 0 
+
+#force controller
+forceController:
+  threshold: [ 1e-2, 1e-2, 1e-2, 1e-2, 1e-2, 1e-2]
+
+cleanSpeed: 0.02 # m/s
+
+#ros
+ros:
+  rate: 100
+
