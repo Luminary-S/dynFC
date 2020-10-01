@@ -6,11 +6,13 @@
 import yaml,os
 import rospy,time,math
 from ur_node import URNode
+from ur_move import UR
 
 class testNode(URNode):
 
     def __init__(self):
         super(testNode,self).__init__()
+        self.ur = UR("ur3")
 
     def ik_test(self, cmd):
         pub = self.joint_pub
@@ -44,7 +46,8 @@ class testNode(URNode):
                 self.ur_stop()
                 return 
             elif direction == "init" :
-                qd = [i/180*math.pi for i in [-6.736, -17.769, 86.226, 283.793, 80.197, 270.892]]
+                q_init = [-29.61, 16.74, 79.71, 273.34, 64.53, 261.54]
+                qd = [i/180*math.pi for i in q_init]
             elif direction == "start" :
                 qd = [i/180*math.pi for i in [-38.45, -37.84, 114.24, 280.19, 66.54, 268.49]]
             # print("direction: ",direction)

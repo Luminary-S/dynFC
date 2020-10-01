@@ -218,7 +218,7 @@ class curi_robotics():
             v[i] = self.admintance_control_bspline(force[i], v_max[i], k[i, 1], k[i, 2], k[i, 3], k[i, 4], C)
 
         
-    def admintance_control_bspline(f, v_max, k1, k2, k3, k4, C):
+    def admintance_control_bspline(self, f, v_max, k1, k2, k3, k4, C):
         v = 0
         if f < -k4:
             v = -v_max

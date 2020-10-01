@@ -11,7 +11,16 @@ forceController:
 
 cleanSpeed: 0.02 # m/s
 
+# trajectory
+UR:
+  Max: 50
+  Min: 30
+  type: 0  #constant: 0; sine-wave:1; saw-wave: 2
+  Ffrequency: 5
+  Cfrequency: 100
+
 #ros
 ros:
   rate: 100
+
 

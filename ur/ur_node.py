@@ -13,8 +13,8 @@ from std_msgs.msg import String, Float32
 from sensor_msgs.msg import JointState
 from geometry_msgs.msg import WrenchStamped
 # from demo_singlercr.msg import rcr, sensorArduino
-from ur_move import UR
-from dynforcecontrol.msg import ft_sensor
+# from ur_move import UR
+# from dynforcecontrol.msg import ft_sensor
 import numpy as np
 import utility as UT
 import math
@@ -23,7 +23,7 @@ class URNode(FrameNode):
     def __init__(self):
         super(URNode, self).__init__()
         self.rate = 50
-        self.ur = UR("ur3")
+        # self.ur = UR("ur3")
 
     def init(self, name = 'ur_node'):
         self.init_node(name)
@@ -50,7 +50,7 @@ class URNode(FrameNode):
     def read_pos_from_ur_joint(self, msg):
         self.now_ur_pos = list(msg.position)
         self.now_vel = list(msg.velocity)
-        self.ur.set_now_q_and_v(self.now_ur_pos,self.now_vel)
+        # self.ur.set_now_q_and_v(self.now_ur_pos,self.now_vel)
 
     def callback_ft_sensor(self, msg):
         # self.force = [msg.Fx, msg.Fy, msg.Fz, msg.Mx, msg.My, msg.Mz]
@@ -70,9 +70,6 @@ class URNode(FrameNode):
         self.set_param("/UR/type",self.urtype)
         self.set_param("/UR/status",self.status)
         self.set_param("/UR/rate",self.rate)
-
-    def set_ur(self):
-        self.ur.set_UR_ROBOT(self.urtype)
 
     """ element ur move """
     # q should be in rad unit, if not use getpi(q) to transfer it

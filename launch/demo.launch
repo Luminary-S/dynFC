@@ -15,7 +15,7 @@
 
     <!-- robotiq FT300  0000-->
     <include file="$(find robotiq_ft_sensor)/launch/ft_sensor.launch" >
-      <arg name="serial_id" value="ttyUSB1" />
+      <arg name="serial_id" value="ttyUSB0" />
     </include>
 
     <!-- IMU startup-->

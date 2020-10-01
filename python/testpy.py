@@ -140,3 +140,5 @@ while i<LIFETIME:
     i+=1
 print(p_l)
 # draw(x,p_l)
+
+
