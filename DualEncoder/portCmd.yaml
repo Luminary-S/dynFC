@@ -1,0 +1,25 @@
+IOboard:
+  baud: 115200
+  send: "55 C8 09 00 55"  
+  back: "1B DB 00 00 0C"  
+
+IMU:
+  baud: 115200
+  send: "68 05 00 0C 00 11"
+  back: "68 05 00 8C 00 91"
+
+DualEncoder:
+  baud: 38400
+  send: "01 03 00 01 00 01 D5 CA"
+  back: "01 03 02 0d a6 3c ae"
+
+Sonic:
+  baud: 9600
+  parity: "EVEN"
+  send: "01 03 00 82 00 01 24 22"
+  back: "01 03 02 55 aa 07 6b"
+
+Force:
+  baud: 19200
+  send: ""
+  back: "20 4e"

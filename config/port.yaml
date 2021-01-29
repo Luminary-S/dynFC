@@ -1,0 +1,2 @@
+DualEncoder: /dev/ttyUSB2
+Force: /dev/ttyUSB1
