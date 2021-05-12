@@ -1,0 +1,34 @@
+<launch>
+  <arg name="canBusNodeName" default="canbus_motor_node" />
+   <node pkg="dynforcecontrol" type="ioboard4_node" name="ioboard4_node" 
+    args="$(arg canBusNodeName)" output="screen">
+
+        <param name="serial_id" type="string" value="/dev/ttyUSB2" />
+        <param name="baud" type="int" value="115200" />
+        <param name="rate" type="double" value="30.0" />
+     <!-- <param name="topic_name" value="can_startup" /> -->
+   </node>
+
+   <!-- <node pkg="robomodule" type="robomodule_node" name="can_startup_node" 
+    output="screen">
+        <param name="pub_rate" value="50.0" />
+     <param name="topic_name" value="can_startup" />
+   </node>
+
+   <arg name="arg1" default="CleanMotor" />
+   <node pkg="robomodule" type="robomodule_node" name="CleanMotor_node" 
+   args="$(arg arg1)" output="screen">
+        <param name="pub_rate" value="30.0" />
+     <param name="topic_name" value="cleanMotor_topic" />
+     <param name="alive" value = "1" />
+   </node> -->
+
+  <!-- <arg name="arg2" default="RCRMotor" />
+   <node pkg="robomodule" type="robomodule_node" name="RCRMotor_node" 
+   args="$(arg arg2)" output="screen">
+     <param name="pub_rate" value="50.0" />
+     <param name="topic_name" value="RCRMotor_topic" />
+     <param name="alive" value="0" />       
+   </node> -->
+
+</launch>

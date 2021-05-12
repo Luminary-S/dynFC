@@ -45,6 +45,11 @@ class Io_board():
     def Init_node(self):
         rospy.init_node(self.nodename)
 
+    def getparam(self):
+        self.baud = rospy.get_param("baud")
+        self.port = rospy.get_param("serial_id")
+        self.rate = rospy.get_param("rate")
+
     def Io_callback(self, msg):
         rospy.loginfo(msg.data)
         self.iostatebuff.append(msg.data)
@@ -52,14 +57,20 @@ class Io_board():
     def Io_Sub(self, topicname):
         sub = rospy.Subscriber(topicname, String, self.Io_callback)
 
+    def Io_read(self, serial):
+        data = serial.read(10).decode('utf-8')
+        print("receive:",data)
+        print(data[-6:-4])
+        print(data[-4:-5])
+
 
 def main():
     iob = Io_board("Io_board_node")
     iob.Init_node()
     iob.Io_Sub("io_state")
-    import serial
+    iob.getparam()
     try:
-        serial = serial.Serial('/dev/ttyUSB2', 115200,
+        serial = serial.Serial(iob.port, iob.baud,
                                timeout=0.5)  # /dev/ttyUSB0
         
         if serial.isOpen():
@@ -69,7 +80,7 @@ def main():
     except:
         print("com error!")
 
-    rate = rospy.Rate(10)
+    rate = rospy.Rate(iob.rate)
     # rostopic pub /io_state std_msgs/String "55C8070155"
     while not rospy.is_shutdown():
         #data =recv(serial)
