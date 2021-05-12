@@ -55,19 +55,31 @@ class Io_board():
         self.iostatebuff.append(msg.data)
     
     def Io_Sub(self, topicname):
-        sub = rospy.Subscriber(topicname, String, self.Io_callback)
+        sub = rospy.Subscriber(topicname+"cmd", String, self.Io_callback)
+        pub = rospy.Publisher(topicname, String, queue_size=1)
+        return pub
 
     def Io_read(self, serial):
         data = serial.read(10).decode('utf-8')
         print("receive:",data)
+        in_status = data[-6:-4]
+        out_status = data[-4:-3]
+        out_state_10 = int(state_16,16)
+        out_state_2 = '{:08b}'.format(state_10)
+        # if out_status == "01":
+        #     ret = "81"
         print(data[-6:-4])
-        print(data[-4:-5])
+        print(data[-4:-3])
+        return out_state_2
+
+    def io_pub(self,pub, str):
+        pub.Publisher(str)
 
 
 def main():
     iob = Io_board("Io_board_node")
     iob.Init_node()
-    iob.Io_Sub("io_state")
+    pub = iob.Io_Sub("io_state")
     iob.getparam()
     try:
         serial = serial.Serial(iob.port, iob.baud,
@@ -87,8 +99,11 @@ def main():
         if len(iob.iostatebuff) != 0:
             iocmd = iob.iostatebuff[-1]
             rospy.loginfo("receive : %s", str(iocmd))
-            time.sleep(1)
+            time.sleep(0.05)
             serial.write(iocmd.decode("hex"))  # 数据写回
+            time.sleep(0.05)
+            io_status_2 = iob.Io_read(serial)
+            iob.io_pub(pub,io_status_2)
         else:
             pass
         # data ='55C81900000055'
