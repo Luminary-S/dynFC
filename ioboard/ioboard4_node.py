@@ -35,6 +35,8 @@ IO_DICT = {
     "10": '55 C8 01 00 55',
     "21": '55 C8 02 01 55',
     "20": '55 C8 02 00 55',
+    # "32": 
+    "88": '55 C7 01 00 55', # inquiry
 }
 
 class Io_board():
@@ -52,7 +54,8 @@ class Io_board():
 
     def Io_callback(self, msg):
         rospy.loginfo(msg.data)
-        self.iostatebuff.append(msg.data)
+        cmd = IO_DICT[msg.data]
+        self.iostatebuff.append(cmd)
     
     def Io_Sub(self, topicname):
         sub = rospy.Subscriber(topicname+"cmd", String, self.Io_callback)
